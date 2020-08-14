@@ -1,6 +1,6 @@
 id=XperiaLibraries
 name=Xperia Libraries
-version=v1.2
-versionCode=2
+version=v1.3
+versionCode=3
 author=Rei Ryuki the Fixer
-description=This module will let you be able to use Xperia Music Play Store version in any ROM other than Xperia ROM.
+description=Xperia Music and Sound Picker in any ROM

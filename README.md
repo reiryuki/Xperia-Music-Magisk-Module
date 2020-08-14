@@ -1,9 +1,9 @@
 # **Xperia Libraries**
 
 ## Description
-This module will let you be able to use [Xperia Music](https://play.google.com/store/apps/details?id=com.sonyericsson.music) Play Store version in any ROM other than Xperia ROM. It should work in Android 10, no need to configure `adb shell` or anything.
+This module will let you be able to use [Xperia Music](https://play.google.com/store/apps/details?id=com.sonyericsson.music) Play Store version and Xperia Sound Pickerin in any ROM. Xperia Music would working in Android 10, no need to configure `adb shell` or anything.
 
-You can install another Xperia apps but it may not be compatible.
+You can install another Xperia apps but the compatibility is not guaranteed.
 
 ## Changelog
 v1.1
@@ -12,8 +12,11 @@ v1.1
 v1.2
 - Remove system.prop to prevent bootloop in some ROMs
 
+v1.3
+- Add Xperia Sound Picker
+- Remove mistakes in permissions xml
+
 ## Requirements
-- Not in Xperia ROM
 - Android Lollipop and Up
 - Magisk Installed
 
