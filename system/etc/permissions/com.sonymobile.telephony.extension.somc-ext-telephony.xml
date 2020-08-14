@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2016 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+
+<permissions>
+    <library name="com.sonymobile.extTelephony.api"
+        file="/system/framework/somc-ext-telephony.jar"/>
+</permissions>
