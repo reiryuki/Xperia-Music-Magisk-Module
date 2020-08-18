@@ -13,14 +13,14 @@ v1.2
 - Remove system.prop to prevent bootloop in some ROMs
 
 v1.3
-- Add Xperia Sound Picker
+- Add Xperia Sound Picker for Marshmallow and up only
 - Remove mistakes in permissions xml
 
 v1.4
 - Fix installation process
 
 ## Requirements
-- Android Lollipop and Up
+- Android Lollipop SDK 21 and Up
 - Magisk Installed
 
 ## Instructions
@@ -33,6 +33,6 @@ v1.4
 ## My Channels
 - Github: [reiryuki](https://github.com/reiryuki)
 - Blog: [reiryuki.blogspot.com](https://reiryuki.blogspot.com)
-- FB: [Android Solutions](https://m.facebook.com/rikiirawan99/?ref=bookmarks)
+- FB: [Android Solutions](https://m.facebook.com/reiryukiandroidsolutions/?ref=bookmarks)
 - YT: [Rei Ryuki](https://www.youtube.com/channel/UCAZBR3IAu-MSLwGXkZPYxag)
 
