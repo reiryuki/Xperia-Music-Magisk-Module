@@ -16,6 +16,9 @@ v1.3
 - Add Xperia Sound Picker
 - Remove mistakes in permissions xml
 
+v1.4
+- Fix installation process
+
 ## Requirements
 - Android Lollipop and Up
 - Magisk Installed
