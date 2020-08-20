@@ -19,8 +19,12 @@ v1.3
 v1.4
 - Fix installation process
 
+v1.5
+- Android Jelly Bean SDK 17 support
+- Remove dex files on module uninstall
+
 ## Requirements
-- Android Lollipop SDK 21 and Up
+- Android Jelly Bean SDK 17 and Up
 - Magisk Installed
 
 ## Instructions
