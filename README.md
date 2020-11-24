@@ -35,8 +35,13 @@ v1.5
 - If you can't find any Xperia apps in Play Store, clear Play Store data!
 
 ## My Channels
-- Github: [reiryuki](https://github.com/reiryuki)
 - Blog: [reiryuki.blogspot.com](https://reiryuki.blogspot.com)
 - FB: [Android Solutions](https://m.facebook.com/reiryukiandroidsolutions/?ref=bookmarks)
 - YT: [Rei Ryuki](https://www.youtube.com/channel/UCAZBR3IAu-MSLwGXkZPYxag)
 
+## Groups discussion
+- https://t.me/joinchat/E-On6U9cxckhIlAnoPIYpw
+- https://t.me/@modsandco
+
+## Donate
+- https://www.paypal.me/reiryuki
