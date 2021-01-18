@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<permissions>
-    <library name="com.sonyericsson.navigationbar"
-        file="/system/framework/com.sonyericsson.navigationbar_impl.jar"/>
-    <library name="com.sonyericsson.navigationbar_2"
-        file="/system/framework/com.sonyericsson.navigationbar_impl.jar"/>
-</permissions>

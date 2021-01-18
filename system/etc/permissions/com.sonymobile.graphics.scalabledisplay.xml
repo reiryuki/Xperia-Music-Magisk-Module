@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<permissions>
-    <library name="com.sonymobile.graphics.scalabledisplay.api_1"
-        file="/system/framework/com.sonymobile.graphics.scalabledisplay_impl.jar"/>
-    <library name="com.sonymobile.graphics.scalabledisplay.api_2"
-        file="/system/framework/com.sonymobile.graphics.scalabledisplay_impl.jar"/>
-</permissions>
