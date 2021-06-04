@@ -1,12 +1,10 @@
 # **Xperia Libraries**
 
 ## Description
-- This module will let you be able to use [Xperia Music](https://play.google.com/store/apps/details?id=com.sonyericsson.music) Play Store version and Xperia Sound Picker in any ROM. Work in Android 10 and 11, no need to configure `adb shell` or anything.
-
-- You can install another Xperia apps but the compatibility is not guaranteed.
+- [Xperia Music](https://play.google.com/store/apps/details?id=com.sonyericsson.music) Play Store version and Xperia Sound Picker. No need to configure `adb shell`.
 
 ## Requirements
-- Android Jelly Bean SDK 17 and Up
+- Android SDK 17 and Up
 - Magisk Installed
 
 ## Instructions
@@ -16,14 +14,11 @@
 ## Troubleshooting
 - Clear Play Store data if Xperia Music still doesn't show up on Play Store.
 
-## My Channels
-- Blog: [reiryuki.blogspot.com](https://reiryuki.blogspot.com)
-- FB: [Android Solutions](https://m.facebook.com/reiryukiandroidsolutions/?ref=bookmarks)
-- YT: [Rei Ryuki](https://www.youtube.com/channel/UCAZBR3IAu-MSLwGXkZPYxag)
-
 ## Telegram
-- https://t.me/audioryukimods
-- https://t.me/modsandco
+- https://t.me/androidryukimods
 
-## Donate
+## Thanks for Donations
 - https://www.paypal.me/reiryuki
+
+## Download
+- Moved link here: https://www.pling.com/p/1533919/
