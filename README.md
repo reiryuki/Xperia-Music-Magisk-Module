@@ -1,4 +1,4 @@
-# **Xperia Libraries**
+# **Xperia Music Magisk Module**
 
 ## Description
 - [Xperia Music](https://play.google.com/store/apps/details?id=com.sonyericsson.music) Play Store version and Xperia Sound Picker. No need to configure `adb shell`.
