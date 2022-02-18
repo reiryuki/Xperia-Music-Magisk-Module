@@ -1,24 +1,27 @@
-# **Xperia Music Magisk Module**
+# Xperia Music Magisk Module
 
 ## Description
-- [Xperia Music](https://play.google.com/store/apps/details?id=com.sonyericsson.music) Play Store version and Xperia Sound Picker. No need to configure `adb shell`.
+- [Xperia Music](https://play.google.com/store/apps/details?id=com.sonyericsson.music) Play Store version and Xperia Sound Picker by Sony Mobile Communications Inc.
+- No need to configure `adb shell`
 
 ## Requirements
-- Android SDK 17 and Up
+- Android 4.2 and Up
 - Magisk Installed
 
 ## Instructions
 - Install this module via Magisk Manager only
 - Reboot
 
-## Troubleshooting
+## Troubleshootings
 - Clear Play Store data if Xperia Music still doesn't show up on Play Store.
 
-## Telegram
-- https://t.me/androidryukimods
+## Bug Report
+- https://t.me/androidryukimodsdiscussions/2618
+- If you don't do above, issues will be closed immediately
 
 ## Thanks for Donations
+- https://t.me/androidryukimodsdiscussions/2619
 - https://www.paypal.me/reiryuki
 
 ## Download
-- Moved link here: https://www.pling.com/p/1533919/
+- https://www.pling.com/p/1533919/
