@@ -2,7 +2,6 @@
 
 ## Description
 - [Xperia Music](https://play.google.com/store/apps/details?id=com.sonyericsson.music) Play Store version and Xperia Sound Picker by Sony Mobile Communications Inc.
-- No need to configure `adb shell`
 
 ## Requirements
 - Android 4.2 and Up
