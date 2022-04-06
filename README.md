@@ -12,8 +12,10 @@
 - Install this module via Magisk Manager only
 - Reboot
 
-## Troubleshootings
+## Optionals & Troubleshootings
 - Clear Play Store data if Xperia Music still doesn't show up on Play Store.
+- https://t.me/androidryukimodsdiscussions/60861
+- https://t.me/androidryukimodsdiscussions/29836
 
 ## Bug Report
 - https://t.me/androidryukimodsdiscussions/2618
