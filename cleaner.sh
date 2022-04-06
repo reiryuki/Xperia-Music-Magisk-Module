@@ -1,0 +1,12 @@
+PKG="com.sonyericsson.music
+     com.sonyericsson.suquashi.soundpicker
+     com.sonymobile.music.googlelyricsplugin
+     com.sonymobile.music.wikipediaplugin
+     com.sonymobile.music.youtubekaraokeplugin
+     com.sonymobile.music.youtubeplugin"
+for PKGS in $PKG; do
+  rm -rf /data/user/*/$PKGS/cache/*
+done
+
+
+
