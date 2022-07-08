@@ -1,7 +1,9 @@
 id=XperiaMusic
 name=Xperia Music
-version=v2.9
-versionCode=19
+version=v3.1-beta.1
+versionCode=21
 author=Rei Ryuki the Fixer
 description=Music player app updatable Play Store version from Sony Mobile Communications Inc. for any Android 4.2 and up.
+# librs_adreno_sha1.so source: https://github.com/Aknx77/vendor_xiaomi_vince/blob/e864e2f88d4407ebf8ebdde8b79e6fab350a91be
+
 

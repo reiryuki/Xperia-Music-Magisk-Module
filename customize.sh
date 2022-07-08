@@ -12,6 +12,9 @@ else
   MAGISKTMP=`find /dev -mindepth 2 -maxdepth 2 -type d -name .magisk`
 fi
 
+# optionals
+OPTIONALS=/sdcard/optionals.prop
+
 # info
 MODVER=`grep_prop version $MODPATH/module.prop`
 MODVERCODE=`grep_prop versionCode $MODPATH/module.prop`
@@ -49,7 +52,7 @@ if [ "$BOOTMODE" != true ]; then
 fi
 FILE=$MODPATH/sepolicy.sh
 DES=$MODPATH/sepolicy.rule
-if [ -f $FILE ] && ! getprop | grep -Eq "sepolicy.sh\]: \[1"; then
+if [ -f $FILE ] && [ "`grep_prop sepolicy.sh $OPTIONALS`" != 1 ]; then
   mv -f $FILE $DES
   sed -i 's/magiskpolicy --live "//g' $DES
   sed -i 's/"//g' $DES
@@ -57,11 +60,12 @@ fi
 
 # cleaning
 ui_print "- Cleaning..."
-APP="`ls $MODPATH/system/priv-app` `ls $MODPATH/system/app`"
-for APPS in $APP; do
-  rm -f `find /data/dalvik-cache /data/resource-cache -type f -name *$APPS*.apk`
-done
-rm -f $MODPATH/LICENSE
+PKG=com.android.musicfx
+if [ "$BOOTMODE" == true ]; then
+  for PKGS in $PKG; do
+    RES=`pm uninstall $PKGS`
+  done
+fi
 rm -rf /metadata/magisk/$MODID
 rm -rf /mnt/vendor/persist/magisk/$MODID
 rm -rf /persist/magisk/$MODID
@@ -88,13 +92,9 @@ fi\' $MODPATH/post-fs-data.sh
 }
 
 # permissive
-if getprop | grep -Eq "permissive.mode\]: \[1"; then
+if [ "`grep_prop permissive.mode $OPTIONALS`" == 1 ]; then
   ui_print "- Using permissive method"
   rm -f $MODPATH/sepolicy.rule
-  permissive
-  ui_print " "
-elif getprop | grep -Eq "permissive.mode\]: \[2"; then
-  ui_print "- Using both permissive and SE policy patch"
   permissive
   ui_print " "
 fi
@@ -137,7 +137,7 @@ if [ "$BOOTMODE" == true ]; then
 else
   DES=/vendor/lib*/librs_adreno.so
 fi
-if ! getprop | grep -Eq "xperia.vendor\]: \[0"; then
+if [ "`grep_prop xperia.vendor $OPTIONALS`" != 0 ]; then
   file_check_vendor_grep
 else
   rm -rf $MODPATH/system/vendor
@@ -163,16 +163,6 @@ DIR=`find $MODPATH/system/vendor -type d`
 for DIRS in $DIR; do
   chown 0.2000 $DIRS
 done
-if [ "$API" -ge 26 ]; then
-  magiskpolicy --live "type vendor_file"
-  magiskpolicy --live "dontaudit vendor_file labeledfs filesystem associate"
-  magiskpolicy --live "allow     vendor_file labeledfs filesystem associate"
-  magiskpolicy --live "dontaudit init vendor_file dir relabelfrom"
-  magiskpolicy --live "allow     init vendor_file dir relabelfrom"
-  magiskpolicy --live "dontaudit init vendor_file file relabelfrom"
-  magiskpolicy --live "allow     init vendor_file file relabelfrom"
-  chcon -R u:object_r:vendor_file:s0 $MODPATH/system/vendor
-fi
 ui_print " "
 
 # library

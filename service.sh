@@ -1,5 +1,3 @@
-(
-
 MODPATH=${0%/*}
 API=`getprop ro.build.version.sdk`
 
@@ -37,6 +35,7 @@ if [ "$API" -ge 30 ]; then
   appops set $PKG NO_ISOLATED_STORAGE allow
   appops set $PKG AUTO_REVOKE_PERMISSIONS_IF_UNUSED ignore
 fi
+appops set $PKG SYSTEM_ALERT_WINDOW allow
 
 # grant
 PKG=com.sonyericsson.suquashi.soundpicker
@@ -77,10 +76,5 @@ fi
 #  appops set $PKG NO_ISOLATED_STORAGE allow
 #  appops set $PKG AUTO_REVOKE_PERMISSIONS_IF_UNUSED ignore
 #fi
-
-) 2>/dev/null
-
-
-
 
 
