@@ -1,8 +1,8 @@
 # Xperia Music Magisk Module
 
 ## DISCLAIMER
-- Sony apps and blobs are owned Sony™.
-- The MIT license specified here is for the Magisk Module, not for Sony apps and blobs.
+- Sony apps are owned by Sony™.
+- The MIT license specified here is for the Magisk Module, not for Sony apps.
 
 ## Descriptions
 - Music app updatable Play Store version and Xperia Sound Picker by Sony Mobile Communications Inc.
