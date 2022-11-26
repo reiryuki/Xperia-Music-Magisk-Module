@@ -1,15 +1,39 @@
-ui_print " "
-
 # boot mode
 if [ "$BOOTMODE" != true ]; then
   abort "- Please flash via Magisk Manager only!"
+fi
+
+# space
+if [ "$BOOTMODE" == true ]; then
+  ui_print " "
 fi
 
 # magisk
 if [ -d /sbin/.magisk ]; then
   MAGISKTMP=/sbin/.magisk
 else
-  MAGISKTMP=`find /dev -mindepth 2 -maxdepth 2 -type d -name .magisk`
+  MAGISKTMP=`realpath /dev/*/.magisk`
+fi
+
+# path
+if [ "$BOOTMODE" == true ]; then
+  MIRROR=$MAGISKTMP/mirror
+else
+  MIRROR=
+fi
+SYSTEM=`realpath $MIRROR/system`
+PRODUCT=`realpath $MIRROR/product`
+VENDOR=`realpath $MIRROR/vendor`
+SYSTEM_EXT=`realpath $MIRROR/system_ext`
+if [ -d $MIRROR/odm ]; then
+  ODM=`realpath $MIRROR/odm`
+else
+  ODM=`realpath /odm`
+fi
+if [ -d $MIRROR/my_product ]; then
+  MY_PRODUCT=`realpath $MIRROR/my_product`
+else
+  MY_PRODUCT=`realpath /my_product`
 fi
 
 # optionals
@@ -45,11 +69,15 @@ else
   ui_print " "
 fi
 
-# sepolicy.rule
+# mount
 if [ "$BOOTMODE" != true ]; then
+  mount -o rw -t auto /dev/block/bootdevice/by-name/cust /vendor
+  mount -o rw -t auto /dev/block/bootdevice/by-name/vendor /vendor
   mount -o rw -t auto /dev/block/bootdevice/by-name/persist /persist
   mount -o rw -t auto /dev/block/bootdevice/by-name/metadata /metadata
 fi
+
+# sepolicy.rule
 FILE=$MODPATH/sepolicy.sh
 DES=$MODPATH/sepolicy.rule
 if [ -f $FILE ] && [ "`grep_prop sepolicy.sh $OPTIONALS`" != 1 ]; then
@@ -74,82 +102,74 @@ rm -rf /cache/magisk/$MODID
 ui_print " "
 
 # function
+permissive_2() {
+sed -i '1i\
+SELINUX=`getenforce`\
+if [ "$SELINUX" == Enforcing ]; then\
+  magiskpolicy --live "permissive *"\
+fi\' $MODPATH/post-fs-data.sh
+}
 permissive() {
+SELINUX=`getenforce`
+if [ "$SELINUX" == Enforcing ]; then
+  setenforce 0
   SELINUX=`getenforce`
   if [ "$SELINUX" == Enforcing ]; then
-    setenforce 0
-    SELINUX=`getenforce`
-    if [ "$SELINUX" == Enforcing ]; then
-      ui_print "  ! Your device can't be turned to Permissive state."
-    fi
+    ui_print "  Your device can't be turned to Permissive state."
+    ui_print "  Using Magisk Permissive mode instead."
+    permissive_2
+  else
     setenforce 1
-  fi
-  sed -i '1i\
+    sed -i '1i\
 SELINUX=`getenforce`\
 if [ "$SELINUX" == Enforcing ]; then\
   setenforce 0\
 fi\' $MODPATH/post-fs-data.sh
+  fi
+fi
 }
 
 # permissive
 if [ "`grep_prop permissive.mode $OPTIONALS`" == 1 ]; then
-  ui_print "- Using permissive method"
+  ui_print "- Using device Permissive mode."
   rm -f $MODPATH/sepolicy.rule
   permissive
+  ui_print " "
+elif [ "`grep_prop permissive.mode $OPTIONALS`" == 2 ]; then
+  ui_print "- Using Magisk Permissive mode."
+  rm -f $MODPATH/sepolicy.rule
+  permissive_2
   ui_print " "
 fi
 
 # function
-file_check_vendor_grep() {
-  for NAMES in $NAME; do
-    if [ "$BOOTMODE" == true ]; then
-      if [ "$IS64BIT" == true ]; then
-        FILE=$MAGISKTMP/mirror/vendor/lib64/$NAMES
-      else
-        FILE=$MAGISKTMP/mirror/vendor/lib/$NAMES
-      fi
-    else
-      if [ "$IS64BIT" == true ]; then
-        FILE=/vendor/lib64/$NAMES
-      else
-        FILE=/vendor/lib/$NAMES
-      fi
+file_check_vendor() {
+for NAMES in $NAME; do
+  if [ "$IS64BIT" == true ]; then
+    FILE=$VENDOR/lib64/$NAMES
+    FILE2=$ODM/lib64/$NAMES
+    if [ -f $FILE ] || [ -f $FILE2 ]; then
+      ui_print "- Detected $NAMES 64"
+      ui_print " "
+      rm -f $MODPATH/system/vendor/lib64/$NAMES
     fi
-    if [ -f $FILE ]; then
-      #rm -f `find $MODPATH -type f -name $NAMES`
-      rm -rf $MODPATH/system/vendor
-    else
-      if grep -Eq $NAMES $DES; then
-        ui_print "- Added $NAMES"
-        ui_print " "
-      else
-        #rm -f `find $MODPATH -type f -name $NAMES`
-        rm -rf $MODPATH/system/vendor
-      fi
-    fi
-  done
+  fi
+  FILE=$VENDOR/lib/$NAMES
+  FILE2=$ODM/lib/$NAMES
+  if [ -f $FILE ] || [ -f $FILE2 ]; then
+    ui_print "- Detected $NAMES"
+    ui_print " "
+    rm -f $MODPATH/system/vendor/lib/$NAMES
+  fi
+done
 }
 
 # check
-NAME=`ls $MODPATH/system/vendor/lib`
-if [ "$BOOTMODE" == true ]; then
-  DES=$MAGISKTMP/mirror/vendor/lib*/librs_adreno.so
-else
-  DES=/vendor/lib*/librs_adreno.so
-fi
-if [ "`grep_prop xperia.vendor $OPTIONALS`" != 0 ]; then
-  file_check_vendor_grep
-else
-  rm -rf $MODPATH/system/vendor
-fi
+NAME=librs_adreno_sha1.so
+file_check_vendor
 
 # /priv-app
-if [ "$BOOTMODE" == true ]; then
-  DIR=$MAGISKTMP/mirror/system/priv-app
-else
-  DIR=/system/priv-app
-fi
-if [ ! -d $DIR ]; then
+if [ ! -d $SYSTEM/priv-app ]; then
   ui_print "- /system/priv-app is not supported"
   ui_print "  Moving to /system/app..."
   cp -rf $MODPATH/system/priv-app/* $MODPATH/system/app
@@ -158,12 +178,14 @@ if [ ! -d $DIR ]; then
 fi
 
 # permission
-ui_print "- Setting permission..."
-DIR=`find $MODPATH/system/vendor -type d`
-for DIRS in $DIR; do
-  chown 0.2000 $DIRS
-done
-ui_print " "
+if [ "$API" -ge 26 ]; then
+  ui_print "- Setting permission..."
+  DIR=`find $MODPATH/system/vendor -type d`
+  for DIRS in $DIR; do
+    chown 0.2000 $DIRS
+  done
+  ui_print " "
+fi
 
 # library
 NAME=com.sony.device
