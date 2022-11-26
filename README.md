@@ -1,7 +1,8 @@
 # Xperia Music Magisk Module
 
 ## DISCLAIMER
-- Dolby & Sony apps and blobs are owned by Dolby™ and Sony™.
+- Sony apps and blobs are owned Sony™.
+- The MIT license specified here is for the Magisk Module, not for Sony apps and blobs.
 
 ## Descriptions
 - Music app updatable Play Store version and Xperia Sound Picker by Sony Mobile Communications Inc.
@@ -34,6 +35,7 @@
 - Android 12 AncientOS ROM
 - Android 12.1 Nusantara ROM
 - Android 13 Nusantara ROM
+- Android 13 AOSP ROM
 
 ## Thanks for Donations
 - This Magisk Module is always will be free but you can however show us that you are care by making a donations:
