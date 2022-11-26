@@ -13,8 +13,8 @@
 - librs_adreno_sha1.so: https://github.com/Aknx77/vendor_xiaomi_vince
 
 ## Requirements
-- Android 4.2 and Up
-- Magisk Installed
+- Android 4.2 and up
+- Magisk installed
 
 ## Installation Guide & Download Link
 - Install this module https://www.pling.com/p/1533919/ via Magisk app only
