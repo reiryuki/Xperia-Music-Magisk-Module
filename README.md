@@ -9,7 +9,7 @@
 
 ## Sources
 - https://play.google.com/store/apps/details?id=com.sonyericsson.music
-- https://apkmirror.com com.sonyericsson.suquashi.soundpicker, com.sonymobile.music.googlelyricsplugin, com.sonymobile.music.wikipediaplugin, com.sonymobile.music.youtubeplugin, & com.sonymobile.music.youtubekaraokeplugin by Sony Mobile Communications Inc.
+- https://apkmirror.com com.sonyericsson.suquashi.soundpicker, com.sonymobile.music.googlelyricsplugin, com.sonymobile.music.wikipediaplugin, com.sonymobile.music.youtubeplugin, com.sonymobile.music.youtubekaraokeplugin, com.sonyericsson.music.product.overlay.morastore, & com.sonyericsson.music.product.overlay.conformance by Sony Mobile Communications Inc.
 - /system/framework/: https://dumps.tadiphone.dev/dumps/sony/i4113 kirin_dsds-user-10-53.1.A.2.2-053001A00020000200894138764-release-keys
 - librs_adreno_sha1.so: https://github.com/Aknx77/vendor_xiaomi_vince
 
