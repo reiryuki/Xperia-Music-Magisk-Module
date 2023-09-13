@@ -38,11 +38,10 @@
 - Android 11 DotOS ROM
 - Android 12 AncientOS ROM
 - Android 12.1 Nusantara ROM
-- Android 13 Nusantara ROM
-- Android 13 AOSP ROM & CrDroid ROM
+- Android 13 Nusantara ROM, AOSP ROM, & CrDroid ROM
 
 ## Thanks for Donations
-- This Magisk Module is always will be free but you can however show us that you are care by making a donations:
+This Magisk Module is always will be free but you can however show us that you are care by making a donations:
 - https://ko-fi.com/reiryuki
 - https://www.paypal.me/reiryuki
 - https://t.me/androidryukimodsdiscussions/2619

@@ -1,39 +1,16 @@
 # debug
-dontaudit system_server system_file file write
-allow     system_server system_file file write
+allow system_server system_file file write
 
 # context
 create { system_lib_file vendor_file vendor_configs_file }
-dontaudit { system_file system_lib_file vendor_file vendor_configs_file } labeledfs filesystem associate
-allow     { system_file system_lib_file vendor_file vendor_configs_file } labeledfs filesystem associate
-dontaudit init { system_file system_lib_file vendor_file vendor_configs_file } { dir file } relabelfrom
-allow     init { system_file system_lib_file vendor_file vendor_configs_file } { dir file } relabelfrom
+allow { system_file system_lib_file vendor_file vendor_configs_file } labeledfs filesystem associate
+allow init { system_file system_lib_file vendor_file vendor_configs_file } { dir file } relabelfrom
 
 # dir
-dontaudit { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app_25 untrusted_app } blkio_dev dir search
-allow     { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app_25 untrusted_app } blkio_dev dir search
+allow { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app_25 untrusted_app } blkio_dev dir search
 
 # file
-dontaudit { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app } vendor_file file { read open execute }
-allow     { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app } vendor_file file { read open execute }
-dontaudit { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app } privapp_data_file file execute
-allow     { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app } privapp_data_file file execute
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+allow { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app } vendor_file file { read open execute }
+allow { priv_app platform_app system_app untrusted_app_29 untrusted_app_27 untrusted_app } privapp_data_file file execute
 
 
