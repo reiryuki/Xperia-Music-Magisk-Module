@@ -1,11 +1,31 @@
 # space
 ui_print " "
 
+# var
+UID=`id -u`
+LIST32BIT=`grep_get_prop ro.product.cpu.abilist32`
+if [ ! "$LIST32BIT" ]; then
+  LIST32BIT=`grep_get_prop ro.system.product.cpu.abilist32`
+fi
+
 # log
 if [ "$BOOTMODE" != true ]; then
-  FILE=/sdcard/$MODID\_recovery.log
+  FILE=/data/media/"$UID"/$MODID\_recovery.log
   ui_print "- Log will be saved at $FILE"
   exec 2>$FILE
+  ui_print " "
+fi
+
+# optionals
+OPTIONALS=/data/media/"$UID"/optionals.prop
+if [ ! -f $OPTIONALS ]; then
+  touch $OPTIONALS
+fi
+
+# debug
+if [ "`grep_prop debug.log $OPTIONALS`" == 1 ]; then
+  ui_print "- The install log will contain detailed information"
+  set -x
   ui_print " "
 fi
 
@@ -30,7 +50,7 @@ fi
 ui_print " "
 
 # sdk
-NUM=17
+NUM=19
 if [ "$API" -lt $NUM ]; then
   ui_print "! Unsupported SDK $API. You have to upgrade your Android"
   ui_print "  version at least SDK API $NUM to use this module."
@@ -42,12 +62,22 @@ fi
 
 # bit
 if [ "$IS64BIT" == true ]; then
-  ui_print "- 64 bit"
+  ui_print "- 64 bit architecture"
+  ui_print " "
+  # 32 bit
+  if [ "$LIST32BIT" ]; then
+    ui_print "- 32 bit library support"
+  else
+    ui_print "- Doesn't support 32 bit library"
+    rm -rf $MODPATH/armeabi-v7a $MODPATH/x86\
+     $MODPATH/system*/lib $MODPATH/system*/vendor/lib
+  fi
+  ui_print " "
 else
-  ui_print "- 32 bit"
+  ui_print "- 32 bit architecture"
   rm -rf `find $MODPATH -type d -name *64*`
+  ui_print " "
 fi
-ui_print " "
 
 # recovery
 mount_partitions_in_recovery
@@ -79,12 +109,6 @@ PRODUCT=`realpath $MIRROR/product`
 SYSTEM_EXT=`realpath $MIRROR/system_ext`
 ODM=`realpath $MIRROR/odm`
 MY_PRODUCT=`realpath $MIRROR/my_product`
-
-# optionals
-OPTIONALS=/sdcard/optionals.prop
-if [ ! -f $OPTIONALS ]; then
-  touch $OPTIONALS
-fi
 
 # sepolicy
 FILE=$MODPATH/sepolicy.rule
@@ -147,29 +171,26 @@ fi
 
 # function
 file_check_vendor() {
-for NAME in $NAMES; do
-  if [ "$IS64BIT" == true ]; then
-    FILE=$VENDOR/lib64/$NAME
-    FILE2=$ODM/lib64/$NAME
-    if [ -f $FILE ] || [ -f $FILE2 ]; then
-      ui_print "- Detected $NAME 64"
-      ui_print " "
-      rm -f $MODPATH/system/vendor/lib64/$NAME
-    fi
-  fi
-  FILE=$VENDOR/lib/$NAME
-  FILE2=$ODM/lib/$NAME
-  if [ -f $FILE ] || [ -f $FILE2 ]; then
-    ui_print "- Detected $NAME"
+for FILE in $FILES; do
+  DES=$VENDOR$FILE
+  DES2=$ODM$FILE
+  if [ -f $DES ] || [ -f $DES2 ]; then
+    ui_print "- Detected $FILE"
     ui_print " "
-    rm -f $MODPATH/system/vendor/lib/$NAME
+    rm -f $MODPATH/system/vendor$FILE
   fi
 done
 }
 
 # check
-NAMES=librs_adreno_sha1.so
-file_check_vendor
+if [ "$IS64BIT" == true ]; then
+  FILES=/lib64/librs_adreno_sha1.so
+  file_check_vendor
+fi
+if [ "$LIST32BIT" ]; then
+  FILES=/lib/librs_adreno_sha1.so
+  file_check_vendor
+fi
 
 # /priv-app
 if [ "$API" -le 18 ]; then
@@ -204,7 +225,7 @@ fi
 NAME=com.sony.device
 if [ "$BOOTMODE" == true ]\
 && ! pm list libraries | grep -q $NAME; then
-  echo 'rm -rf /data/user*/*/com.android.vending/*' >> $MODPATH/cleaner.sh
+  echo 'rm -rf /data/user*/"$UID"/com.android.vending/*' >> $MODPATH/cleaner.sh
   ui_print "- Play Store data will be cleared automatically"
   ui_print "  after reboot"
   ui_print " "
