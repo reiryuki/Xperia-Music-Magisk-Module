@@ -14,7 +14,7 @@
 - librs_adreno_sha1.so: https://github.com/Aknx77/vendor_xiaomi_vince
 
 ## Requirements
-- Android 4.2 and up
+- Android 4.4 and up
 - Magisk or KernelSU installed
 
 ## Installation Guide & Download Link
