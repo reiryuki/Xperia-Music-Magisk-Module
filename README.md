@@ -1,8 +1,8 @@
 # Xperia Music Magisk Module
 
 ## DISCLAIMER
-- Sony apps are owned by Sony™.
-- The MIT license specified here is for the Magisk Module only, not for Sony apps.
+- Sony apps and blobs are owned by Sony™.
+- The MIT license specified here is for the Magisk Module only, not for Sony apps and blobs.
 
 ## Descriptions
 - Music app updatable Play Store version and Sound Picker by Sony Mobile Communications Inc.
@@ -39,11 +39,13 @@
 - Android 12 AncientOS ROM
 - Android 12.1 Nusantara ROM
 - Android 13 Nusantara ROM, AOSP ROM, & CrDroid ROM
+- Android 14 LineageOS ROM
 
-## Thanks for Donations
-This Magisk Module is always will be free but you can however show us that you are care by making a donations:
-- https://ko-fi.com/reiryuki
-- https://www.paypal.me/reiryuki
+## Credits and Contributors
+- https://t.me/androidryukimodsdiscussions
+- You can contribute ideas about this Magisk Module here: https://t.me/androidappsportdevelopment
+
+## Sponsors
 - https://t.me/androidryukimodsdiscussions/2619
 
 

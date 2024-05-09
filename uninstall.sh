@@ -12,7 +12,8 @@ set -x
 
 # cleaning
 remove_cache
-PKGS=`cat $MODPATH/package.txt | sed 's|com.sonyericsson.music||g'`
+PKGS=`cat $MODPATH/package.txt\
+       | sed 's|com.sonyericsson.music||g'`
 for PKG in $PKGS; do
   rm -rf /data/user*/"$UID"/$PKG*
 done
