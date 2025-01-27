@@ -91,6 +91,9 @@ PKG=com.sonyericsson.music
 if [ "$API" -ge 33 ]; then
   pm grant $PKG android.permission.POST_NOTIFICATIONS
 fi
+if [ "$API" -ge 35 ]; then
+  appops set $PKG MEDIA_ROUTING_CONTROL allow
+fi
 appops set $PKG SYSTEM_ALERT_WINDOW allow
 grant_permission
 
