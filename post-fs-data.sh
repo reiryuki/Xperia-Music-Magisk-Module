@@ -8,17 +8,21 @@ set -x
 # var
 API=`getprop ro.build.version.sdk`
 ABI=`getprop ro.product.cpu.abi`
+if [ ! -d $MODPATH/vendor ]\
+|| [ -L $MODPATH/vendor ]; then
+  MODSYSTEM=/system
+fi
 
 # function
 permissive() {
-if [ "$SELINUX" == Enforcing ]; then
-  if ! setenforce 0; then
-    echo 0 > /sys/fs/selinux/enforce
-  fi
+if [ "`toybox cat $FILE`" = 1 ]; then
+  chmod 640 $FILE
+  chmod 440 $FILE2
+  echo 0 > $FILE
 fi
 }
 magisk_permissive() {
-if [ "$SELINUX" == Enforcing ]; then
+if [ "`toybox cat $FILE`" = 1 ]; then
   if [ -x "`command -v magiskpolicy`" ]; then
 	magiskpolicy --live "permissive *"
   else
@@ -37,11 +41,12 @@ fi
 }
 
 # selinux
-SELINUX=`getenforce`
-chmod 0755 $MODPATH/*/libmagiskpolicy.so
+FILE=/sys/fs/selinux/enforce
+FILE2=/sys/fs/selinux/policy
 #1permissive
+chmod 0755 $MODPATH/*/libmagiskpolicy.so
 #2magisk_permissive
-#kFILE=$MODPATH/sepolicy.rule
+FILE=$MODPATH/sepolicy.rule
 #ksepolicy_sh
 FILE=$MODPATH/sepolicy.pfsd
 sepolicy_sh
@@ -53,14 +58,8 @@ if [ "$API" -ge 26 ]; then
   for DIR in $DIRS; do
     chown 0.2000 $DIR
   done
-  if [ -L $MODPATH/system/vendor ]\
-  && [ -d $MODPATH/vendor ]; then
-    chcon -R u:object_r:vendor_file:s0 $MODPATH/vendor
-    chcon -R u:object_r:vendor_overlay_file:s0 $MODPATH/vendor/overlay
-  else
-    chcon -R u:object_r:vendor_file:s0 $MODPATH/system/vendor
-    chcon -R u:object_r:vendor_overlay_file:s0 $MODPATH/system/vendor/overlay
-  fi
+  chcon -R u:object_r:vendor_file:s0 $MODPATH$MODSYSTEM/vendor
+  chcon -R u:object_r:vendor_overlay_file:s0 $MODPATH$MODSYSTEM/vendor/overlay
 fi
 
 # cleaning

@@ -198,20 +198,17 @@ sed -i 's|#2||g' $MODPATH/post-fs-data.sh
 }
 permissive() {
 FILE=/sys/fs/selinux/enforce
-SELINUX=`cat $FILE`
-if [ "$SELINUX" == 1 ]; then
-  if ! setenforce 0; then
-    echo 0 > $FILE
-  fi
-  SELINUX=`cat $FILE`
-  if [ "$SELINUX" == 1 ]; then
+FILE2=/sys/fs/selinux/policy
+if [ "`toybox cat $FILE`" = 1 ]; then
+  chmod 640 $FILE
+  chmod 440 $FILE2
+  echo 0 > $FILE
+  if [ "`toybox cat $FILE`" = 1 ]; then
     ui_print "  Your device can't be turned to Permissive state."
     ui_print "  Using Magisk Permissive mode instead."
     permissive_2
   else
-    if ! setenforce 1; then
-      echo 1 > $FILE
-    fi
+    echo 1 > $FILE
     sed -i 's|#1||g' $MODPATH/post-fs-data.sh
   fi
 else
@@ -280,7 +277,21 @@ APPS="`ls $MODPATH/system/priv-app`
 hide_oat
 
 # overlay
-if [ ! -d /product/overlay ]; then
+if [ "`grep_prop overlay.location $OPTIONALS`" == odm ]\
+&& [ -d /odm/overlay ]; then
+  if grep /odm /data/adb/magisk/magisk\
+  || grep /odm /data/adb/magisk/magisk64\
+  || grep /odm /data/adb/magisk/magisk32; then
+    ui_print "- Using /odm/overlay/ instead of /product/overlay/"
+    mv -f $MODPATH/system/product $MODPATH/system/odm
+    ui_print " "
+  else
+    ui_print "! Kitsune Mask/Magisk Delta is not installed or"
+    ui_print "  the version doesn't support /odm"
+    ui_print " "
+  fi
+elif [ ! -d /product/overlay ]\
+|| [ "`grep_prop overlay.location $OPTIONALS`" == vendor ]; then
   ui_print "- Using /vendor/overlay/ instead of /product/overlay/"
   cp -rf $MODPATH/system/product/overlay $MODPATH/system/vendor
   rm -rf $MODPATH/system/product

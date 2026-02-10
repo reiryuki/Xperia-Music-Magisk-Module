@@ -16,12 +16,12 @@
 ## Requirements
 - Xperia Music Min-28: Android 9 (SDK 28) and up
 - Xperia Music Min-19: Android 4.4 (SDK 19) and up
-- Magisk or KernelSU installed
+- Magisk or Kitsune Mask or KernelSU or Apatch installed
 
 ## Installation Guide & Download Link
+- If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings and install https://github.com/KernelSU-Modules-Repo/meta-overlayfs first
 - Download the right module file according to your ROM SDK API level here: https://www.pling.com/p/1533919/ (READ Requirements above!)
 - Install the module via Magisk app or KernelSU app only
-- If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings
 - Reboot
 - If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot after
 - If you are using SUList, you need to allow list manually your home launcher app (enable show system apps) and reboot after
