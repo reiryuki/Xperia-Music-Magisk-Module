@@ -158,8 +158,8 @@ fi
 # recovery
 mount_partitions_in_recovery
 
-# magisk
-magisk_setup
+# mirror
+mirror_setup
 
 # path
 SYSTEM=`realpath $MIRROR/system`
@@ -254,15 +254,6 @@ if [ "$ABILIST32" ]; then
   file_check_vendor
 fi
 
-# /priv-app
-if [ "$API" -le 18 ]; then
-  ui_print "- /system/priv-app is not supported in SDK 18 and bellow"
-  ui_print "  Using /system/app instead"
-  cp -rf $MODPATH/system/priv-app/* $MODPATH/system/app
-  rm -rf $MODPATH/system/priv-app
-  ui_print " "
-fi
-
 # function
 hide_oat() {
 for APP in $APPS; do
@@ -311,19 +302,19 @@ fi
 # unmount
 unmount_mirror
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# prepare
+PKG=com.sonyericsson.music
+DIR=/storage/emulated/"$UID"/Android/data/$PKG/files/album_images
+DIR2=/storage/emulated/"$UID"/Android/data/$PKG/files/drive_images
+DIR3=/storage/emulated/"$UID"/Android/data/$PKG/cache
+ui_print "- Creating directories:"
+ui_print "  $DIR"
+mkdir -p $DIR
+ui_print "  $DIR2"
+mkdir -p $DIR2
+ui_print "  $DIR3"
+mkdir -p $DIR3
+ui_print " "
 
 
 
