@@ -96,8 +96,8 @@ Magisk or Kitsune Mask or KernelSU or Apatch installed
 ## Installation Guide & Download Link
 - If you are using KernelSU, you need to disable Unmount Modules by Default in KernelSU app settings and install https://github.com/KernelSU-Modules-Repo/meta-overlayfs or https://github.com/KernelSU-Modules-Repo/magic_mount_rs or https://github.com/KernelSU-Modules-Repo/hybrid_mount or https://github.com/maxsteeel/nomount first depending on ROM compatibility
 - Download the right module file according to your ROM SDK API level:
-  - Minimum SDK 28: https://github.com/reiryuki/Xperia-Music-Magisk-Module
-  - Minimum SDK 19: https://github.com/reiryuki/Xperia-Music-Magisk-Module
+  - Minimum SDK 28: https://devuploads.com/0ftonaeg3hyq
+  - Minimum SDK 19: https://devuploads.com/wkvu4ucgv772
 - Install the module via Magisk/Kitsune Mask/KernelSU/Apatch app or Recovery if Magisk/Kitsune Mask installed
 - Reboot
 - If you are using KernelSU, you need to allow superuser list manually all package name listed in package.txt (and your home launcher app also) (enable show system apps) and reboot after
